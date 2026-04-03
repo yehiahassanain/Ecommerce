@@ -16,6 +16,13 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import CartContextProvider, { CartContext } from "./Context/CartContext";
+import { Toaster } from "react-hot-toast";
+
+let queryClient = new QueryClient();
+
 function App() {
   const [count, setCount] = useState(0);
   let router = createBrowserRouter([
@@ -34,9 +41,16 @@ function App() {
   ]);
 
   return (
-    <UserContextProvider>
-      <RouterProvider router={router}></RouterProvider>
-    </UserContextProvider>
+    <CartContextProvider>
+      <QueryClientProvider client={queryClient}>
+      <UserContextProvider>
+        <RouterProvider router={router}></RouterProvider>
+        <ReactQueryDevtools />
+        <Toaster />
+      </UserContextProvider>
+    </QueryClientProvider>
+    </CartContextProvider>
+    
   );
 }
 
