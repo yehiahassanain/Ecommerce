@@ -9,13 +9,17 @@ import { CartContext } from "../../Context/CartContext";
 import toast from "react-hot-toast";
 export default function RecentProducts() {
   let { addToCart } = useContext(CartContext);
+  
   let { data, isError, error, isLoading, isFetching } = useProducts();
 
   async function addProductToCart(productId) {
     let response = await addToCart(productId);
+    
     if (response.data.status === "success") {
+      console.log("added");
       toast.success("Product added to cart successfully!",{duration: 1500});
     } else {
+            console.log("error");
       toast.error("Failed to add product to cart. Please try again.",{duration: 1500});
     }
     console.log(response);

@@ -10,6 +10,7 @@ export default function Cart() {
 
   async function getcart() {
     let response = await getCartItems();
+    console.log("Cart Details:", response.data);
     setCartDetails(response.data);
   }
   async function updatecart(productId, newQuantity) {

@@ -25,6 +25,7 @@ export default function CartContextProvider(props) {
         .catch((error) => error);
     }
     function addToCart(productId) {
+        // console.log("Adding product to cart:", productId);
         return axios.post(`https://ecommerce.routemisr.com/api/v1/cart`, {productId}, {headers})
         .then((response) => response)
         .catch((error) => error);
